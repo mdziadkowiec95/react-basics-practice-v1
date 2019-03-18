@@ -1,0 +1,17 @@
+  .item {
+    text-align: center;
+
+    font-size: .9rem;
+  }
+
+  .item {
+    padding: .5rem;
+
+    &:not(:last-child) {
+      border-right: 1px solid #666;
+    }
+  }
+
+  .label {
+    font-weight: 700;
+  }

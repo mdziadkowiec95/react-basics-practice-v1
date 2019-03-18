@@ -1,0 +1,1 @@
+axios(`https://api.football-data.org/v2/competitions/${this.props.code.competitionCode}/matches?status=SCHEDULED&limit=50`
