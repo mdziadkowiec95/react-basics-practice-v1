@@ -3,12 +3,12 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { APIkey } from '../../base/base';
 
-import AllCompetitionsList from '../../components/AllCompetitionsList/AllCompetitionsList';
+// import AllCompetitionsList from '../../components/AllCompetitionsList/AllCompetitionsList';
 
 
 const AllCompetitionsView = () => (
   <>
-    <AllCompetitionsList />
+    {/* <AllCompetitionsList /> */}
   </>
 );
 

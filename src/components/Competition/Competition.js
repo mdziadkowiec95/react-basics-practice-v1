@@ -2,20 +2,23 @@ import React from 'react';
 import axios from 'axios';
 import styles from './Competition.module.scss';
 import { APIkey } from '../../base/base';
+import CompetitionContext from '../../context';
 import Loader from '../Loader/Loader';
 import Header from '../Header/Header';
+import Teams from '../Teams/Teams';
 
 class Competition extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       generalInfo: {},
-      isLoading: false,
+      teams: [],
+      isLoading: true,
     };
   }
 
   componentDidMount() {
-    // console.log(this.props);
+    console.log(this.props);
 
     this.setState({ isLoading: true });
 
@@ -53,6 +56,10 @@ class Competition extends React.Component {
 
   render() {
     const { generalInfo, isLoading } = this.state;
+    const contextElements = {
+      ...this.state,
+
+    };
 
     if (isLoading) {
       return <Loader />
@@ -60,8 +67,12 @@ class Competition extends React.Component {
 
     return (
       <>
-        <Header {...generalInfo} />
-        {/* {this.state.matches.map(el => `<p>${el.homeTeam.name} vs ${el.awayTeam.name}</p>`)} */}
+        <CompetitionContext.Provider value={contextElements}>
+          <Header {...generalInfo} />
+          <div className={styles.wrapper}>
+            {/* <Teams /> */}
+          </div>
+        </CompetitionContext.Provider>
       </>
     )
   }

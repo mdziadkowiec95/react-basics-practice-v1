@@ -1,11 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './Title.module.scss';
 
-const Title = ({ additional, children }) => (
-  <h2 className={styles.title}>
+const Title = ({ tag: Tag, additional, children }) => (
+  <Tag className={styles.title}>
     {children}
-    <span className={styles.additional}> ({additional})</span>
-  </h2>
+    {additional && <span className={styles.additional}> ({additional})</span>}
+  </Tag>
 );
+
+Title.defaultProps = {
+  tag: 'h2',
+};
 
 export default Title;    
