@@ -1,14 +1,18 @@
 import React from 'react';
-import styles from './Button';
-import { NavLink } from 'react-router-dom'
+import styles from './Button.module.scss';
+import AppContext from '../../context';
+import { Link } from 'react-router-dom'
 
 const Button = (props) => (
-  <NavLink
-    activeClassName={styles.navItemLinkActive}
-    className={styles.navItemLink}
-    to="/"
-  // onClick={(e) => context.getActiveCompetition(e, code)}
-  >BACK</NavLink>
+  <AppContext.Consumer>
+    {(context) => (
+      <Link
+        className={styles.navItemLink}
+        to="/"
+        onClick={(e) => context.getActiveCompetition(e, '')}
+      >BACK</Link>
+    )}
+  </AppContext.Consumer>
 );
 
 export default Button;

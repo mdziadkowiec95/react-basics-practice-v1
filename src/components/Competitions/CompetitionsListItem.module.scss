@@ -1,0 +1,39 @@
+.listItem {
+  &Link {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 0 50px;
+
+    color: #fff;
+
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: rgba(#333, 0.3);
+
+      .header {
+        transform: translateX(-30px);
+      }
+      .logo {
+        transform: translateX(30px);
+      }
+    }
+  }
+}
+
+.header {
+  transition: transform 0.3s ease;
+}
+
+.logo {
+  flex: 1 1 auto;
+  align-self: center;
+
+  max-width: 130px;
+
+  transition: transform 0.3s ease;
+}
