@@ -1,0 +1,66 @@
+.wrapper {
+  padding: 1rem 0.5rem 0.5rem 0.5rem;
+
+  border-bottom: 1px solid #aaa;
+
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: rgba(#333, 0.3);
+  }
+}
+
+.teams {
+  display: flex;
+  justify-content: center;
+}
+
+.team {
+  flex: 1 1 calc(50% - 25px);
+
+  font-size: 1.4rem;
+
+  transition: transform 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    color: #fff;
+  }
+
+  &Home {
+    &:hover {
+      transform: translateX(1rem);
+    }
+  }
+
+  &Away {
+    text-align: right;
+
+    &:hover {
+      transform: translateX(-1rem);
+    }
+  }
+}
+
+.versus {
+  // display:;
+  // width: 50px;
+  // height: 50px;
+  border-radius: 50%;
+
+  background-color: #333;
+  color: #fff;
+
+  line-height: 1.6;
+}
+
+.details {
+  color: #ccc;
+
+  font-size: 0.9rem;
+
+  text-align: center;
+}
+
+.date {
+  margin-right: 1rem;
+}

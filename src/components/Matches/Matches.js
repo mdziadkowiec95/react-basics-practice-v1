@@ -14,12 +14,20 @@ class Matches extends React.Component {
   };
 
   componentDidMount() {
-    const competition = this.props.match.params.code;
+    this.setState(
+      {
+        isLoading: true,
+        competitionCode: this.props.match.params.code
+      },
+      this.getMatchesData
+    );
+  }
 
-    this.setState({ isLoading: true });
-
+  getMatchesData = () => {
     axios(
-      `https://api.football-data.org/v2/competitions/${competition}/matches?status=SCHEDULED&limit=50`,
+      `https://api.football-data.org/v2/competitions/${
+        this.state.competitionCode
+      }/matches?status=SCHEDULED&limit=5`,
       {
         method: "get",
         headers: { "X-Auth-Token": APIkey }
@@ -32,7 +40,17 @@ class Matches extends React.Component {
           name: data.competition.name,
           area: data.competition.area.name
         };
+
         const matches = data.matches.map(el => {
+          const fullTime =
+            el.score.fullTime.homeTeam !== null
+              ? [el.score.fullTime.homeTeam, el.score.fullTime.awayTeam]
+              : null;
+
+          const halfTime = el.score.halfTime.homeTeam
+            ? [el.score.halfTime.homeTeam, el.score.halfTime.homeTeam]
+            : null;
+
           return {
             id: el.id,
             homeTeam: {
@@ -44,7 +62,11 @@ class Matches extends React.Component {
               name: el.awayTeam.name
             },
             date: el.utcDate,
-            matchday: el.matchday
+            matchday: el.matchday,
+            score: {
+              fullTime: fullTime,
+              halfTime: halfTime
+            }
           };
         });
 
@@ -60,11 +82,12 @@ class Matches extends React.Component {
       .then(() => {
         // always executed
       });
-  }
+  };
 
   render() {
     const { matches, isLoading } = this.state;
-    const match = this.props;
+    const match = this.props.match;
+    // console.log(match);
 
     if (isLoading) {
       return <Loader />;
@@ -72,9 +95,10 @@ class Matches extends React.Component {
 
     return (
       <>
+        {/* <Route path={`${match.path}/team/:id`} component={Team} /> */}
         <Title>Upcoming Matches</Title>
         <div className={styles.wrapper}>
-          <MatchesList items={matches} />
+          <MatchesList match={match} items={matches} />
         </div>
       </>
     );

@@ -14,7 +14,8 @@ class App extends React.Component {
         <div className={styles.wrapper}>
           <Switch>
             <Route exact path="/" component={Competitions} />
-            <Route path="/:code" component={Matches} />
+            <Route exact path="/:code" component={Matches} />
+            <Route path="/:code/team/:teamID" component={Team} />
           </Switch>
         </div>
       </BrowserRouter>
