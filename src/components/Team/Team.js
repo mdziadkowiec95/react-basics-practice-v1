@@ -1,8 +1,10 @@
 import React from "react";
 import axios from "axios";
 import { APIkey } from "../../base/base";
-import Title from "../Title/Title";
+import styles from "./Team.module.scss";
+import Header from "./Header";
 import Loader from "../Loader/Loader";
+import List from "./List";
 
 class Team extends React.Component {
   state = {
@@ -24,13 +26,26 @@ class Team extends React.Component {
       .then(response => {
         const data = response.data;
 
+        const squad = data.squad.map(player => {
+          return {
+            id: player.id,
+            name: player.name,
+            position: player.position,
+            shirtNumber: player.shirtNumber,
+            nationality: player.nationality
+          };
+        });
+
         this.setState({
           name: data.name,
           image: data.crestUrl,
+          address: data.address,
+          website: data.website,
+          founded: data.founded,
+          stadium: data.venue,
+          squad: squad,
           isLoading: false
         });
-
-        console.log(data);
       })
       .catch(error => {
         console.log(error);
@@ -41,17 +56,37 @@ class Team extends React.Component {
   };
 
   render() {
-    const { isLoading } = this.state;
+    const {
+      name,
+      image,
+      address,
+      website,
+      founded,
+      stadium,
+      squad,
+      isLoading
+    } = this.state;
+
+    const headerDetails = {
+      name,
+      image,
+      address,
+      website,
+      founded,
+      stadium
+    };
 
     if (isLoading) {
       return <Loader />;
     }
 
     return (
-      <div>
-        <Title>{this.state.name}</Title>
-        <img src={this.state.image} />
-      </div>
+      <>
+        <Header {...headerDetails} />
+        <div className={styles.wrapper}>
+          <List players={squad} />
+        </div>
+      </>
     );
   }
 }

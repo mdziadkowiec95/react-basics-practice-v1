@@ -18,10 +18,8 @@ class Root extends React.Component {
     isLoading: false
   };
 
-
- 
-  getCode = (code) => {
-    this.setState({ currentCode: code }); 
+  getCode = code => {
+    this.setState({ currentCode: code });
   };
 
   render() {

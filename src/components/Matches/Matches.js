@@ -1,5 +1,4 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import { APIkey } from "../../base/base";
 import styles from "./Matches.module.scss";
@@ -9,6 +8,7 @@ import MatchesList from "./MatchesList";
 
 class Matches extends React.Component {
   state = {
+    generalInfo: {},
     matches: [],
     isLoading: false
   };
@@ -85,9 +85,9 @@ class Matches extends React.Component {
   };
 
   render() {
-    const { matches, isLoading } = this.state;
+    const { generalInfo, matches, isLoading } = this.state;
     const match = this.props.match;
-    // console.log(match);
+    console.log(match);
 
     if (isLoading) {
       return <Loader />;
@@ -95,8 +95,7 @@ class Matches extends React.Component {
 
     return (
       <>
-        {/* <Route path={`${match.path}/team/:id`} component={Team} /> */}
-        <Title>Upcoming Matches</Title>
+        <Title additional="upcoming matches">{generalInfo.name}</Title>
         <div className={styles.wrapper}>
           <MatchesList match={match} items={matches} />
         </div>

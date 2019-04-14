@@ -8,12 +8,14 @@
 
     padding: 0 50px;
 
+    min-height: 150px;
+
     color: #fff;
 
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: rgba(#333, 0.3);
+      background-color: rgba(#333, 0.5);
 
       .header {
         transform: translateX(-30px);
@@ -33,7 +35,7 @@
   flex: 1 1 auto;
   align-self: center;
 
-  max-width: 130px;
+  max-width: 100px;
 
   transition: transform 0.3s ease;
 }
